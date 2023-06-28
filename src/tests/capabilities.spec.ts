@@ -17,18 +17,18 @@ test.describe('FFmpeg get capabilities', async () => {
     const ready = await page.evaluate(async () => {
       if (!ffmpeg.isReady) {
         await new Promise<void>((resolve) => {
-          globalThis.ffmpeg.whenReady(resolve);
+          ffmpeg.whenReady(resolve);
         });
       }
 
-      return globalThis.ffmpeg.isReady;
+      return ffmpeg.isReady;
     });
     expect(ready).toBe(true);
   });
 
   test('test that popular audio decoders are available', async () => {
     const codecs = await page.evaluate(async () => {
-      return await globalThis.ffmpeg.codecs();
+      return await ffmpeg.codecs();
     });
 
     expect(codecs).toBeTruthy();
@@ -43,7 +43,7 @@ test.describe('FFmpeg get capabilities', async () => {
 
   test('test that popular audio encoders are available', async () => {
     const codecs = await page.evaluate(async () => {
-      return await globalThis.ffmpeg.codecs();
+      return await ffmpeg.codecs();
     });
 
     expect(codecs).toBeTruthy();
@@ -56,7 +56,7 @@ test.describe('FFmpeg get capabilities', async () => {
 
   test('test that popular video decoders are available', async () => {
     const codecs = await page.evaluate(async () => {
-      return await globalThis.ffmpeg.codecs();
+      return await ffmpeg.codecs();
     });
 
     expect(codecs).toBeTruthy();
@@ -68,7 +68,7 @@ test.describe('FFmpeg get capabilities', async () => {
 
   test('test that popular video encoders are available', async () => {
     const codecs = await page.evaluate(async () => {
-      return await globalThis.ffmpeg.codecs();
+      return await ffmpeg.codecs();
     });
 
     expect(codecs).toBeTruthy();
@@ -81,7 +81,7 @@ test.describe('FFmpeg get capabilities', async () => {
 
   test("test that audio/video encoders/decoders don't intersect", async () => {
     const codecs = await page.evaluate(async () => {
-      return await globalThis.ffmpeg.codecs();
+      return await ffmpeg.codecs();
     });
 
     expect(codecs).toBeTruthy();
@@ -117,7 +117,7 @@ test.describe('FFmpeg get capabilities', async () => {
 
   test('test that .formats returns popular demuxers', async () => {
     const formats = await page.evaluate(async () => {
-      return await globalThis.ffmpeg.formats();
+      return await ffmpeg.formats();
     });
 
     expect(formats).toBeTruthy();
@@ -130,7 +130,7 @@ test.describe('FFmpeg get capabilities', async () => {
 
   test('test that .formats returns popular muxers', async () => {
     const formats = await page.evaluate(async () => {
-      return await globalThis.ffmpeg.formats();
+      return await ffmpeg.formats();
     });
 
     expect(formats).toBeTruthy();

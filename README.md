@@ -1,1 +1,138 @@
-# ffmpeg-js
+# 🎥 FFmpeg.js: A WebAssembly-powered FFmpeg Interface for Browsers
+
+Welcome to FFmpeg.js, an innovative library that offers a WebAssembly-powered interface for utilizing FFmpeg in the browser. 🌐💡
+
+## ❓ Why FFmpeg.js?
+
+This project has been inspired by the awesome work of [ffmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm), but we noted a few drawbacks that might limit its applicability for broader use:
+
+1. The project employs a GPL3 build of FFmpeg, limiting its use for commercial projects. 🚫💼
+2. It's developed in JavaScript and hence offers limited typing, restricting the potential for more rigorous static type checks. ❗⌨️
+3. The lack of an object-oriented approach for writing FFmpeg commands. 🔄📝
+
+## ✔️ FFmpeg.js to the Rescue!
+
+Addressing the issues above, FFmpeg.js:
+
+- Provides an LGPL build of FFmpeg, making it commercially more viable, checkout https://ffmpeg.org/legal.html for more detail. 🟢💼
+- Is written in TypeScript, introducing static type checking to enhance code reliability. 👌🔍
+- Offers an object-oriented interface for writing FFmpeg commands, inspired by `fluent-ffmpeg`
+  , making it more programmer-friendly. 🎯🔄
+
+However, it's important to note that as of now, FFmpeg.js runs only in Chrome, Firefox, and Edge browsers. It doesn't support Safari or Node. 🚧🔍
+
+## ⚙️ Setup
+
+Setting up FFmpeg.js is a breeze!
+
+```bash
+npm i @diffusion-studio/ffmpeg-js
+```
+
+This should install the library. Now because ffmpeg.js requires the use of the [SharedArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer) you need to enable `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy: require-corp` on the server side.
+
+### ⚡️Vite
+
+In a vite environment you can simply add these policies by putting the following into your `vite-config.js`:
+
+```js
+...
+server: {
+    ...
+    headers: {
+      'Cross-Origin-Embedder-Policy': 'require-corp',
+      'Cross-Origin-Opener-Policy': 'same-origin',
+    },
+},
+...
+```
+
+## 💻 Usage
+
+Somewhere in your project you need to initiate a ffmpeg instance.
+
+```typescript
+import { FFmpeg } from '@diffusion-studio/ffmpeg-js';
+
+const ffmpeg = new FFmpeg();
+```
+
+By default this will pull a [LGPLv2.1 compliant build](https://github.com/diffusion-studio/ffmpeg-wasm-lgpl-build) of FFmpeg from the [UNPKG delivery network](https://www.unpkg.com).<br> Consequently if you immidiately intent to run commands you need to wait until the binaries have been fetched successfully, like this:
+
+```typescript
+ffmpeg.whenReady(async () => {
+  await ffmpeg.exec(['-help']);
+});
+```
+
+This will output the ffmpeg help as fast as possible.
+
+> HINT: Even though this library intends to provide a object oriented interface for ffmpeg, you can still run commands manually using the `exec` method.
+
+When working with files you need to save them to the in-memory file system first:
+
+```typescript
+const source = 'https://<path to file>/<filename>.mp4';
+
+// write to file system
+await ffmpeg.writeFile('input.mp4', source);
+
+// convert mp4 to avi
+await ffmpeg.exec(['-i', 'input.mp4', 'output.avi']);
+
+// read from file system
+const result: Uint8Array = ffmpeg.readFile('output.avi');
+
+// free memory
+ffmpeg.deleteFile('input.mp4');
+ffmpeg.deleteFile('output.avi');
+```
+
+Let's see how you would get the same result using the **object oriented** way.
+
+```typescript
+const source = 'https://<path to file>/<filename>.mp4';
+
+const result: Uint8Array = ffmpeg
+  .input({ source })
+  .ouput({ format: 'avi' })
+  .export();
+```
+
+> If you were wondering, yes the memory is being managed for you.
+
+## 📖 Examples
+
+Take a look at these tests for more examples:
+
+- https://github.com/diffusion-studio/ffmpeg-js/blob/main/src/tests/export.spec.ts
+- https://github.com/diffusion-studio/ffmpeg-js/blob/main/src/tests/commands.spec.ts
+
+## 🛑 Limitations
+
+- Webassembly is limited to 2GB
+- Difficult to handle in unit tests, it's probably best if you mock the FFmpeg class and leave the testing to us (which is also good practice).
+- The LGPLv2.1 build of FFmpeg without external libaries doesn't support any mainstream video delivery codecs such as h264/hevc/vp9. But it's very useful for audio processing, run the following commands for more information
+
+```typescript
+console.log(await ffmpeg.codecs());
+console.log(await ffmpeg.formats());
+```
+
+**BUT WAIT THERE IS MORE!** FFmpeg js is compatible with the binaries of `@ffmpeg/core`, which supports all major codecs like those mentioned before. Here is how you can configure it:
+
+```typescript
+import {
+  FFmpeg,
+  FFmpegConfigurationGPLExtended,
+} from '@diffusion-studio/ffmpeg-js';
+
+// FFmpegConfigurationGPLExtended will add the type extensions
+const ffmpeg = new FFmpeg<FFmpegConfigurationGPLExtended>({
+  lib: 'gpl-extended',
+});
+```
+Thats it!
+> More FFmpeg LGPLv2.1 builds with external libraries such as VP9 and LAME will be added soon!
+
+We believe that FFmpeg.js will significantly streamline your interaction with FFmpeg in the browser, providing a more effective and efficient coding experience. Happy coding! 🚀🌟

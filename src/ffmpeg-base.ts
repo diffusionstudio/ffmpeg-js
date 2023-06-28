@@ -96,7 +96,8 @@ export class FFmpegBase {
    * to receive commands
    */
   public whenReady(cb: types.EventCallback) {
-    this._whenReady.push(cb);
+    if (this.isReady) cb();
+    else this._whenReady.push(cb);
   }
 
   /**

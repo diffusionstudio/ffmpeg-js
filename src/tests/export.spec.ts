@@ -16,18 +16,18 @@ test.describe('FFmpeg basic exporting', async () => {
     const ready = await page.evaluate(async () => {
       if (!ffmpeg.isReady) {
         await new Promise<void>((resolve) => {
-          globalThis.ffmpeg.whenReady(resolve);
+          ffmpeg.whenReady(resolve);
         });
       }
 
-      return globalThis.ffmpeg.isReady;
+      return ffmpeg.isReady;
     });
     expect(ready).toBe(true);
   });
 
   test('test converting ogg into wav', async () => {
     const length = await page.evaluate(async () => {
-      const result = await globalThis.ffmpeg
+      const result = await ffmpeg
         .input({ source: 'http://localhost:5173/samples/audio.ogg' })
         .ouput({ format: 'wav' })
         .export();
@@ -40,7 +40,7 @@ test.describe('FFmpeg basic exporting', async () => {
 
   test('test converting ogg to flac', async () => {
     const length = await page.evaluate(async () => {
-      const result = await globalThis.ffmpeg
+      const result = await ffmpeg
         .input({ source: 'http://localhost:5173/samples/audio.ogg' })
         .ouput({ format: 'flac' })
         .export();
@@ -52,7 +52,7 @@ test.describe('FFmpeg basic exporting', async () => {
 
   test('test converting ogg to m4v using aac encoding', async () => {
     const length = await page.evaluate(async () => {
-      const result = await globalThis.ffmpeg
+      const result = await ffmpeg
         .input({ source: 'http://localhost:5173/samples/audio.ogg' })
         .ouput({
           format: 'm4v',
@@ -72,7 +72,7 @@ test.describe('FFmpeg basic exporting', async () => {
 
   test('test converting mp3 to ogg', async () => {
     const length = await page.evaluate(async () => {
-      const result = await globalThis.ffmpeg
+      const result = await ffmpeg
         .input({ source: 'http://localhost:5173/samples/audio.mp3' })
         .ouput({ format: 'ogg' })
         .export();
@@ -84,12 +84,12 @@ test.describe('FFmpeg basic exporting', async () => {
 
   test('test cutting a mp3 and and converting it to wav', async () => {
     const lengths = await page.evaluate(async () => {
-      const result1 = await globalThis.ffmpeg
+      const result1 = await ffmpeg
         .input({ source: 'http://localhost:5173/samples/audio.mp3' })
         .ouput({ format: 'wav' })
         .export();
 
-      const result2 = await globalThis.ffmpeg
+      const result2 = await ffmpeg
         .input({ source: 'http://localhost:5173/samples/audio.mp3', seek: 5 })
         .ouput({ format: 'wav', duration: 5 })
         .export();
@@ -101,7 +101,7 @@ test.describe('FFmpeg basic exporting', async () => {
 
   test('test converting wav to flac', async () => {
     const length = await page.evaluate(async () => {
-      const result = await globalThis.ffmpeg
+      const result = await ffmpeg
         .input({ source: 'http://localhost:5173/samples/audio.wav' })
         .ouput({ format: 'flac' })
         .export();
@@ -113,7 +113,7 @@ test.describe('FFmpeg basic exporting', async () => {
 
   test('test converting mp4 into avi', async () => {
     const length = await page.evaluate(async () => {
-      const result = await globalThis.ffmpeg
+      const result = await ffmpeg
         .input({ source: 'http://localhost:5173/samples/video.mp4' })
         .ouput({ format: 'avi' })
         .export();
@@ -125,7 +125,7 @@ test.describe('FFmpeg basic exporting', async () => {
 
   test('test adding wav audio track to mp4', async () => {
     const length = await page.evaluate(async () => {
-      const result = await globalThis.ffmpeg
+      const result = await ffmpeg
         .input({ source: 'http://localhost:5173/samples/video.mp4' })
         .input({ source: 'http://localhost:5173/samples/audio.wav' })
         .ouput({

@@ -16,18 +16,18 @@ test.describe('FFmpeg create command', async () => {
     const ready = await page.evaluate(async () => {
       if (!ffmpeg.isReady) {
         await new Promise<void>((resolve) => {
-          globalThis.ffmpeg.whenReady(resolve);
+          ffmpeg.whenReady(resolve);
         });
       }
 
-      return globalThis.ffmpeg.isReady;
+      return ffmpeg.isReady;
     });
     expect(ready).toBe(true);
   });
 
   test('test that basic command can be created', async () => {
     const command = await page.evaluate(async () => {
-      return await globalThis.ffmpeg
+      return await ffmpeg
         .input({ source: 'abc.mp4' })
         .ouput({ format: 'mp3' })
         .command();
@@ -41,11 +41,11 @@ test.describe('FFmpeg create command', async () => {
 
   test('test that new input resets exisiting ones', async () => {
     const command = await page.evaluate(async () => {
-      globalThis.ffmpeg
+      ffmpeg
         .input({ source: 'abc.mp4' })
         .ouput({ format: 'mp3', duration: 20 });
 
-      return await globalThis.ffmpeg
+      return await ffmpeg
         .input({ source: 'rrr.mp4' })
         .ouput({ format: 'm4v', duration: 10 })
         .command();
@@ -61,7 +61,7 @@ test.describe('FFmpeg create command', async () => {
 
   test('test that input seeking works', async () => {
     const command = await page.evaluate(async () => {
-      return await globalThis.ffmpeg
+      return await ffmpeg
         .input({ source: 'cba.mp3', seek: 40 })
         .ouput({ format: 'wav' })
         .command();
@@ -77,7 +77,7 @@ test.describe('FFmpeg create command', async () => {
 
   test('test that using an image sequence as input works', async () => {
     const command = await page.evaluate(async () => {
-      return await globalThis.ffmpeg
+      return await ffmpeg
         .input({
           sequence: ['my-image-0001.png', 'my-image-0002.png'],
           framerate: 30,
@@ -97,7 +97,7 @@ test.describe('FFmpeg create command', async () => {
 
   test('test that adding filters works', async () => {
     const command = await page.evaluate(async () => {
-      return await globalThis.ffmpeg
+      return await ffmpeg
         .input({ source: 'ccc.mp4' })
         .videoFilter('rotate=90')
         .audioFilter('silencedetect=noise=0.0001')
@@ -118,7 +118,7 @@ test.describe('FFmpeg create command', async () => {
   test('test that adding a filter to multiple inputs throws error', async () => {
     const result = await page.evaluate(async () => {
       try {
-        await globalThis.ffmpeg
+        await ffmpeg
           .input({ source: 'abc.mov' })
           .input({ source: 'xyz.mov' })
           .videoFilter('scale=640:360')
@@ -135,7 +135,7 @@ test.describe('FFmpeg create command', async () => {
 
   test('test that adding complex filters works', async () => {
     const command = await page.evaluate(async () => {
-      return await globalThis.ffmpeg
+      return await ffmpeg
         .input({ source: 'abc.webm' })
         .input({ source: 'xyz.png' })
         .complexFilter('overlay')
@@ -154,7 +154,7 @@ test.describe('FFmpeg create command', async () => {
 
   test('test that adding video output options works', async () => {
     const command = await page.evaluate(async () => {
-      return await globalThis.ffmpeg
+      return await ffmpeg
         .input({ source: 'bbb.webm' })
         .ouput({
           format: 'm4v',
@@ -192,7 +192,7 @@ test.describe('FFmpeg create command', async () => {
 
   test('test that video output can be disabled', async () => {
     const command = await page.evaluate(async () => {
-      return await globalThis.ffmpeg
+      return await ffmpeg
         .input({ source: 'bbb.webm' })
         .ouput({
           format: 'm4v',
@@ -206,7 +206,7 @@ test.describe('FFmpeg create command', async () => {
 
   test('test that adding audio output options works', async () => {
     const command = await page.evaluate(async () => {
-      return await globalThis.ffmpeg
+      return await ffmpeg
         .input({ source: 'bbb.webm' })
         .ouput({
           format: 'm4v',
@@ -244,7 +244,7 @@ test.describe('FFmpeg create command', async () => {
 
   test('test that audio output can be disabled', async () => {
     const command = await page.evaluate(async () => {
-      return await globalThis.ffmpeg
+      return await ffmpeg
         .input({ source: 'bbb.webm' })
         .ouput({
           format: 'm4v',
