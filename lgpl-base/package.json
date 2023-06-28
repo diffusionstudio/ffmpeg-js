@@ -1,0 +1,29 @@
+{
+  "name": "@diffusion-studio/ffmpeg-lgpl-base",
+  "version": "0.0.1",
+  "private": false,
+  "description": "FFmpeg lgpl base built without external libraries",
+  "main": "dist/ffmpeg-core.js",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:diffusion-studio/ffmpeg.wasm-lgpl-build.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "ffmpeg",
+    "webassembly",
+    "audio"
+  ],
+  "author": "mail@konstantinpaulus.de",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/diffusion-studio/ffmpeg.wasm-lgpl-build/issues"
+  },
+  "homepage": "https://github.com/diffusion-studio/ffmpeg.wasm-lgpl-build#readme"
+}

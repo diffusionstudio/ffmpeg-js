@@ -1,0 +1,19 @@
+{
+  "name": "@diffusion-studio/ffmpeg-js",
+  "private": false,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "npx playwright test --project=chromium",
+    "prettier": "npx prettier --write ./src"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.35.1",
+    "prettier": "2.8.8",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.9"
+  }
+}
