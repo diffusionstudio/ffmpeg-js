@@ -2,6 +2,12 @@
 
 Welcome to FFmpeg.js, an innovative library that offers a WebAssembly-powered interface for utilizing FFmpeg in the browser. 🌐💡
 
+<form action="https://discord.gg/EmUMFvMdhT" method="get" target="_blank">
+<button type="submit" style="padding: 0.3rem 0.5rem; font-weight: 600;">👥Join our Discord</button>
+</form>
+
+----
+
 ## ❓ Why FFmpeg.js?
 
 This project has been inspired by the awesome work of [ffmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm), but we noted a few drawbacks that might limit its applicability for broader use:
