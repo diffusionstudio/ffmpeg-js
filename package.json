@@ -2,7 +2,56 @@
   "name": "@diffusion-studio/ffmpeg-js",
   "private": false,
   "version": "0.0.1",
+  "description": "FFmpeg.js - Use FFmpeg in the browser powered by WebAssembly",
   "type": "module",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:diffusion-studio/ffmpeg-js.git"
+  },
+  "module": "./dist/ffmpeg-js.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/ffmpeg-js.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "mail@konstantinpaulus.de",
+  "license": "MIT",
+  "keywords": [
+    "ffmpeg",
+    "webassembly",
+    "audio",
+    "browser",
+    "video",
+    "video processing",
+    "audio processing",
+    "wasm",
+    "muxer",
+    "demuxer",
+    "codecs",
+    "encoding",
+    "decoding",
+    "mp3",
+    "wav",
+    "flac",
+    "ogg",
+    "hevc",
+    "h264",
+    "editing",
+    "cutting"
+  ],
+  "bugs": {
+    "url": "https://github.com/diffusion-studio/ffmpeg-js/issues"
+  },
+  "homepage": "https://github.com/diffusion-studio/ffmpeg-js#readme",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -14,6 +63,7 @@
     "@playwright/test": "^1.35.1",
     "prettier": "2.8.8",
     "typescript": "^5.0.2",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "vite-plugin-dts": "^3.0.0-beta.3"
   }
 }

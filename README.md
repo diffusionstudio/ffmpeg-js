@@ -37,7 +37,7 @@ This should install the library. Now because ffmpeg.js requires the use of the [
 
 ### ⚡️Vite
 
-In a vite environment you can simply add these policies by putting the following into your `vite-config.js`:
+In a vite environment you can simply add these policies by putting the following into your `vite.config.js`:
 
 ```js
 ...
@@ -92,7 +92,7 @@ ffmpeg.deleteFile('input.mp4');
 ffmpeg.deleteFile('output.avi');
 ```
 
-Let's see how you would get the same result using the **object oriented** way.
+Let's see how you would get the same result the **object oriented** way.
 
 ```typescript
 const source = 'https://<path to file>/<filename>.mp4';
@@ -109,6 +109,7 @@ const result: Uint8Array = ffmpeg
 
 Take a look at these tests for more examples:
 
+- https://github.com/diffusion-studio/ffmpeg-js/blob/main/examples/src/main.ts
 - https://github.com/diffusion-studio/ffmpeg-js/blob/main/src/tests/export.spec.ts
 - https://github.com/diffusion-studio/ffmpeg-js/blob/main/src/tests/commands.spec.ts
 

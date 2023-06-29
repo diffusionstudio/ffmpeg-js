@@ -23,18 +23,17 @@ export const toBlobURL = async (url: string) => {
     js: 'application/javascript',
     wasm: 'application/wasm',
   };
-  const buf = await (await fetch(url)).arrayBuffer();
-  const blob = new Blob([buf], {
+  const buffer = await (await fetch(url)).arrayBuffer();
+  const blob = new Blob([buffer], {
     type: mimeTypes[url.split('.')?.at(-1) ?? 'js'],
   });
-  const blobURL = URL.createObjectURL(blob);
-  return blobURL;
+  return URL.createObjectURL(blob);
 };
 
 /**
  * Noop logger
  */
 export const noop = (msg?: any, ...params: any[]) => {
-  msg = undefined;
-  params = [];
+  msg;
+  params;
 };
