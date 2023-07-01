@@ -1,7 +1,8 @@
 import { IFFmpegConfiguration } from './interfaces';
 import { FFmpegBase } from './ffmpeg-base';
 import * as types from './types';
-import libs from './lib-config';
+import configs from './ffmpeg-config';
+import { noop } from './utils';
 
 export class FFmpeg<
   Config extends IFFmpegConfiguration<
@@ -14,11 +15,19 @@ export class FFmpeg<
   private _output?: types.OutputOptions<Config>;
   private _middleware: string[] = [];
 
-  public constructor(settings: types.FFmpegSettings = { lib: 'lgpl-base' }) {
-    super({
-      logger: settings.logger ?? console.log,
-      source: settings.source ?? libs[settings.lib],
-    });
+  public constructor(settings: types.FFmpegSettings = {}) {
+    let logger = console.log;
+    let source = configs[settings?.config ?? "lgpl-base"];
+
+    if (settings?.log == false) {
+      logger = noop;
+    }
+
+    if (settings?.source) {
+      source = settings.source;
+    }
+
+    super({ logger, source });
   }
 
   /**

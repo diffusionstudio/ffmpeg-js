@@ -14,7 +14,6 @@ export default defineConfig({
     command: 'npm run dev',
     url: 'http://localhost:5173/',
   },
-
   testDir: './src/tests',
   /* Run tests in files in parallel */
   fullyParallel: false,
@@ -47,9 +46,9 @@ export default defineConfig({
       use: { ...devices['Desktop Firefox'] },
     },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
   ],
 });

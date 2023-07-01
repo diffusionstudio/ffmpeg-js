@@ -1,4 +1,4 @@
-import libs from '../lib-config';
+import configs from '../ffmpeg-config';
 
 /**
  * Defines a callback function that
@@ -63,12 +63,11 @@ export type FFmpegSettings = {
    * **COMPLY WITH**, checkout https://ffmpeg.org/legal.html
    * for more.
    */
-  lib: keyof typeof libs;
+  config?: keyof typeof configs;
   /**
-   * Overwrite the logging function.
-   * The default is console log
+   * Choose whether ffmpeg should log each output
    */
-  logger?(msg?: any, ...params: any[]): void;
+  log?: boolean;
 };
 
 /**

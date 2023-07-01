@@ -3,8 +3,7 @@ import typescriptLogo from './typescript.svg';
 import viteLogo from '/vite.svg';
 import { FFmpeg } from '@diffusion-studio/ffmpeg-js';
 
-const logger = () => null;
-const ffmpeg = new FFmpeg({ logger, lib: "lgpl-base" });
+const ffmpeg = new FFmpeg({ log: false });
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>

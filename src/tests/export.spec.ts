@@ -123,6 +123,18 @@ test.describe('FFmpeg basic exporting', async () => {
     expect(length).toBeGreaterThan(0);
   });
 
+  test('test converting mp4 into gif', async () => {
+    const length = await page.evaluate(async () => {
+      const result = await ffmpeg
+        .input({ source: 'http://localhost:5173/samples/video.mp4' })
+        .ouput({ format: 'gif' })
+        .export();
+
+      return result?.length;
+    });
+    expect(length).toBeGreaterThan(0);
+  });
+
   test('test adding wav audio track to mp4', async () => {
     const length = await page.evaluate(async () => {
       const result = await ffmpeg

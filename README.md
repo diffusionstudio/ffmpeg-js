@@ -2,7 +2,7 @@
 
 Welcome to FFmpeg.js, an innovative library that offers a WebAssembly-powered interface for utilizing FFmpeg in the browser. 🌐💡
 
-### [👥Join our Discord](https://discord.gg/EmUMFvMdhT)
+### [👥Join our Discord](https://discord.gg/n3mpzfejAb)
 
 ----
 
@@ -25,7 +25,7 @@ Addressing the issues above, FFmpeg.js:
 
 However, it's important to note that as of now, FFmpeg.js runs only in Chrome, Firefox, and Edge browsers. It doesn't support Safari or Node. 🚧🔍
 
-## ⚙️ Setup
+## 🚀 Setup
 
 Setting up FFmpeg.js is a breeze!
 
@@ -117,14 +117,23 @@ Take a look at these tests for more examples:
 
 - Webassembly is limited to 2GB
 - Difficult to handle in unit tests, it's probably best if you mock the FFmpeg class and leave the testing to us (which is also good practice).
-- The LGPLv2.1 build of FFmpeg without external libaries doesn't support any mainstream video delivery codecs such as h264/hevc/vp9. But it's very useful for audio processing, run the following commands for more information
+- There is no hardware accileration available, making video encoding/decoding rather slow.
+
+## ⚙️ Configurations
+
+Currently there are two different FFmpeg configurations available with more on the way.
+
+- `lgpl-base` (default): It is a compilation of FFmpeg without any external libraries, which is useful for audio & video muxing/demuxing and audio encoding/decoding. It is v2.1LGPL compliant and can therefore be used for commercial projects.
+- `gpl-extended`: This is the [@ffmpeg/core](https://github.com/ffmpegwasm/ffmpeg.wasm-core) configuration, that has been built with `--enable-gpl` and `--enable-nonfree` and can therefore only be used for commercial projects if the entire codebase is publicly accessible. It supports popular delivery codecs such as `h264/h265/vp9` etc.
+
+For more information about the supported codecs and muxers run the following commands:
 
 ```typescript
 console.log(await ffmpeg.codecs());
 console.log(await ffmpeg.formats());
 ```
 
-**BUT WAIT THERE IS MORE!** FFmpeg js is compatible with the binaries of `@ffmpeg/core`, which supports all major codecs like those mentioned before. Here is how you can configure it:
+This is how you can switch the configuration:
 
 ```typescript
 import {
@@ -134,10 +143,15 @@ import {
 
 // FFmpegConfigurationGPLExtended will add the type extensions
 const ffmpeg = new FFmpeg<FFmpegConfigurationGPLExtended>({
-  lib: 'gpl-extended',
+  config: 'gpl-extended',
 });
 ```
 Thats it!
-> More FFmpeg LGPLv2.1 builds with external libraries such as VP9 and LAME will be added soon!
 
 We believe that FFmpeg.js will significantly streamline your interaction with FFmpeg in the browser, providing a more effective and efficient coding experience. Happy coding! 🚀🌟
+
+### DISCLAIMER
+
+*The information contained in this text is provided for informational purposes only. It is not intended as a comprehensive guide to the GPL and LGPL license usages nor does it offer legal advice. Laws and regulations surrounding software licenses can be complex and may change over time. The author and provider of this information cannot be held responsible for any errors, omissions, or any outcomes related to your use of this information.*
+
+*While every effort has been made to ensure the information presented here is accurate as of the date of publication, no guarantee is given as to its currency or applicability to your specific situation. You should not rely upon this information as a substitute for consultation with a legal professional or other competent advisors. Always consult with a qualified professional familiar with your particular circumstances before making decisions that could have legal implications.*

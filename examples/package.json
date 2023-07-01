@@ -13,6 +13,6 @@
     "vite": "^4.3.9"
   },
   "dependencies": {
-    "@diffusion-studio/ffmpeg-js": "file:.."
+    "@diffusion-studio/ffmpeg-js": "^0.0.2"
   }
 }
