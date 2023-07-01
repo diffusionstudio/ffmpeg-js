@@ -57,7 +57,8 @@
     "build": "rm -r -f ./dist && tsc && vite build",
     "preview": "vite preview",
     "test": "npx playwright test --project=chromium",
-    "prettier": "npx prettier --write ./src"
+    "prettier": "npx prettier --write ./src",
+    "tarball": "npm view @diffusion-studio/ffmpeg-js dist.tarball"
   },
   "devDependencies": {
     "@playwright/test": "^1.35.1",

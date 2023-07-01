@@ -4,7 +4,11 @@ Welcome to FFmpeg.js, an innovative library that offers a WebAssembly-powered in
 
 ### [👥Join our Discord](https://discord.gg/n3mpzfejAb)
 
-----
+## Demo
+
+![GIF Converter Demo](./public/preview.gif)
+
+[Open Demo Application](https://ffmpeg-js-preview.vercel.app/)
 
 ## ❓ Why FFmpeg.js?
 
@@ -146,12 +150,13 @@ const ffmpeg = new FFmpeg<FFmpegConfigurationGPLExtended>({
   config: 'gpl-extended',
 });
 ```
+
 Thats it!
 
 We believe that FFmpeg.js will significantly streamline your interaction with FFmpeg in the browser, providing a more effective and efficient coding experience. Happy coding! 🚀🌟
 
 ### DISCLAIMER
 
-*The information contained in this text is provided for informational purposes only. It is not intended as a comprehensive guide to the GPL and LGPL license usages nor does it offer legal advice. Laws and regulations surrounding software licenses can be complex and may change over time. The author and provider of this information cannot be held responsible for any errors, omissions, or any outcomes related to your use of this information.*
+_The information contained in this text is provided for informational purposes only. It is not intended as a comprehensive guide to the GPL and LGPL license usages nor does it offer legal advice. Laws and regulations surrounding software licenses can be complex and may change over time. The author and provider of this information cannot be held responsible for any errors, omissions, or any outcomes related to your use of this information._
 
-*While every effort has been made to ensure the information presented here is accurate as of the date of publication, no guarantee is given as to its currency or applicability to your specific situation. You should not rely upon this information as a substitute for consultation with a legal professional or other competent advisors. Always consult with a qualified professional familiar with your particular circumstances before making decisions that could have legal implications.*
+_While every effort has been made to ensure the information presented here is accurate as of the date of publication, no guarantee is given as to its currency or applicability to your specific situation. You should not rely upon this information as a substitute for consultation with a legal professional or other competent advisors. Always consult with a qualified professional familiar with your particular circumstances before making decisions that could have legal implications._
