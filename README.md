@@ -139,8 +139,8 @@ const result: Uint8Array = ffmpeg
 Take a look at these tests for more examples:
 
 - https://github.com/diffusion-studio/ffmpeg-js/blob/main/examples/src/main.ts
-- https://github.com/diffusion-studio/ffmpeg-js/blob/main/src/tests/export.spec.ts
-- https://github.com/diffusion-studio/ffmpeg-js/blob/main/src/tests/commands.spec.ts
+- https://github.com/diffusion-studio/ffmpeg-js/blob/main/tests/export.spec.ts
+- https://github.com/diffusion-studio/ffmpeg-js/blob/main/tests/commands.spec.ts
 
 ## 🛑 Limitations
 
