@@ -37,3 +37,17 @@ export const noop = (msg?: any, ...params: any[]) => {
   msg;
   params;
 };
+
+/**
+ * Parse a ffmpeg progress event output
+ */
+export const parseProgress = (msg: string): number => {
+  // strip non required information
+  const match = msg
+    .match(/(^frame=)(\W)*([0-9]{1,})(\W)/)
+    ?.at(0) // get first match
+    ?.replace(/frame=/, '') // replace prefix
+    ?.trim(); // remove spaces surrounding the number
+
+  return parseInt(match ?? '0');
+};

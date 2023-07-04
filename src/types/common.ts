@@ -13,6 +13,13 @@ export type EventCallback = () => void;
 export type MessageCallback = (msg: string) => void;
 
 /**
+ * Defines a callback function that
+ * gets called during rendering when a number
+ * of frames has been rendered
+ */
+export type ProgressCallback = (progress: number) => void;
+
+/**
  * Defines encoder and decoder records that
  * contain the supported formats
  */

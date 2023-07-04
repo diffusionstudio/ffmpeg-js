@@ -17,7 +17,7 @@ export class FFmpeg<
 
   public constructor(settings: types.FFmpegSettings = {}) {
     let logger = console.log;
-    let source = configs[settings?.config ?? "lgpl-base"];
+    let source = configs[settings?.config ?? 'lgpl-base'];
 
     if (settings?.log == false) {
       logger = noop;

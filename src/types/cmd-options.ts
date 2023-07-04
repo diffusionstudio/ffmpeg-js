@@ -9,7 +9,7 @@ export type AudioOutputOptions<AudioCodecExtension> = {
    * codecs with `ffmpeg.codecs()`. Use `"copy"` to use the input codec.
    * @example "aac"
    */
-  codec: 'copy' | AudioCodecExtension;
+  codec?: 'copy' | AudioCodecExtension;
   /**
    * An integer representing the number of frame
    * samples per second (Hz).
@@ -49,7 +49,7 @@ export type VideoOutputOptions<VideoCodecExtension> = {
    * codecs with `ffmpeg.codecs()`. Use `"copy"` to use the input codec.
    * @example "h263"
    */
-  codec: 'copy' | VideoCodecExtension;
+  codec?: 'copy' | VideoCodecExtension;
   /**
    * A number repersenting the framerate
    * @example 30 // fps

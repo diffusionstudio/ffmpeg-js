@@ -1,5 +1,6 @@
 import { noop, toBlobURL, toUint8Array } from './utils';
 import * as types from './types';
+import * as utils from './utils';
 
 export class FFmpegBase {
   private _module: any;
@@ -12,7 +13,9 @@ export class FFmpegBase {
 
   private _whenReady: Array<types.EventCallback> = [];
   private _whenExecutionDone: Array<types.EventCallback> = [];
+
   private _onMessage: Array<types.MessageCallback> = [];
+  private _onProgress: Array<types.ProgressCallback> = [];
 
   private _memory: string[] = [];
 
@@ -33,8 +36,11 @@ export class FFmpegBase {
    */
   private handleMessage(msg: string) {
     this._logger(msg);
-    if (typeof msg == 'string' && msg.match(/(FFMPEG_END|error)/i)) {
+    if (msg.match(/(FFMPEG_END|error)/i)) {
       this._whenExecutionDone.forEach((cb) => cb());
+    }
+    if (msg.match(/^frame=/)) {
+      this._onProgress.forEach((cb) => cb(utils.parseProgress(msg)));
     }
     this._onMessage.forEach((cb) => cb(msg));
   }
@@ -117,10 +123,26 @@ export class FFmpegBase {
 
   /**
    * Remove the callback function from the
-   * message listeners
+   * message callbacks
    */
   public removeOnMessage(cb: types.MessageCallback) {
     this._onMessage = this._onMessage.filter((item) => item != cb);
+  }
+
+  /**
+   * Gets called when a number of frames
+   * has been rendered
+   */
+  public onProgress(cb: types.ProgressCallback) {
+    this._onProgress.push(cb);
+  }
+
+  /**
+   * Remove the callback function from the
+   * progress callbacks
+   */
+  public removeOnProgress(cb: types.ProgressCallback) {
+    this._onProgress = this._onProgress.filter((item) => item != cb);
   }
 
   /**

@@ -24,7 +24,7 @@ export default defineConfig(({ command }) => {
       },
     },
     plugins: [dts({
-      exclude: 'src/tests/**',
+      exclude: 'tests/**',
     })],
     server: {
       headers: {

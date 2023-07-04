@@ -55,6 +55,31 @@ server: {
 ...
 ```
 
+### △Next.js
+
+Here is an example `next.config.js` that supports the SharedArrayBuffer:
+```
+module.exports = {
+    async headers() {
+        return [
+            {
+                source: '/',
+                headers: [
+                    {
+                        key: 'Cross-Origin-Embedder-Policy',
+                        value: 'require-corp',
+                    },
+                    {
+                        key: 'Cross-Origin-Opener-Policy',
+                        value: 'same-origin',
+                    },
+                ],
+            },
+        ];
+    },
+};
+```
+
 ## 💻 Usage
 
 Somewhere in your project you need to initiate a ffmpeg instance.

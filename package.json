@@ -1,7 +1,7 @@
 {
   "name": "@diffusion-studio/ffmpeg-js",
   "private": false,
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "FFmpeg.js - Use FFmpeg in the browser powered by WebAssembly",
   "type": "module",
   "files": [
@@ -57,7 +57,7 @@
     "build": "rm -r -f ./dist && tsc && vite build",
     "preview": "vite preview",
     "test": "npx playwright test --project=chromium",
-    "prettier": "npx prettier --write ./src",
+    "prettier": "npx prettier --write ./src ./tests",
     "tarball": "npm view @diffusion-studio/ffmpeg-js dist.tarball"
   },
   "devDependencies": {

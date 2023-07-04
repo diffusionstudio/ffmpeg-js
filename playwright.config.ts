@@ -14,7 +14,7 @@ export default defineConfig({
     command: 'npm run dev',
     url: 'http://localhost:5173/',
   },
-  testDir: './src/tests',
+  testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
