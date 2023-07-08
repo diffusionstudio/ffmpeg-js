@@ -19,6 +19,10 @@ export const SUPPORTED_VIDEO_CONVERSIONS = [
   ['webm', 'avi'],
   ['webm', 'mov'],
   ['webm', 'wmv'],
+  ['mkv', 'mp4'],
+  ['mkv', 'avi'],
+  ['mkv', 'mov'],
+  ['mkv', 'wmv'],
   ['wmv', 'mp4'],
   ['wmv', 'avi'],
   ['wmv', 'mov'],
@@ -32,4 +36,5 @@ export const VIDEO_EXTENSIONS = [
   'ogg',
   'webm',
   'wmv',
+  'mkv',
 ] as const;

@@ -72,6 +72,7 @@ export type ExtensionBase =
   | 'mpg'
   | 'mpeg'
   | 'mov'
+  | 'mkv'
   | 'ts'
   | 'm2t'
   | 'm2ts'

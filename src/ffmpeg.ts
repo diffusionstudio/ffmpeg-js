@@ -2,7 +2,7 @@ import { IFFmpegConfiguration } from './interfaces';
 import { FFmpegBase } from './ffmpeg-base';
 import * as types from './types';
 import configs from './ffmpeg-config';
-import { noop } from './utils';
+import { noop, parseMetadata } from './utils';
 
 export class FFmpeg<
   Config extends IFFmpegConfiguration<
@@ -218,6 +218,82 @@ export class FFmpeg<
     const file = this.readFile(cmd.at(-1) ?? '');
     this.clearMemory();
     return file;
+  }
+
+  /**
+   * Get the meta data of a the specified file.
+   * Returns information such as codecs, fps, bitrate etc.
+   */
+  public async meta(source: string | Blob): Promise<types.Metadata> {
+    await this.writeFile('probe', source);
+    const meta: types.Metadata = {
+      streams: { audio: [], video: [] },
+    };
+    const callback = parseMetadata(meta);
+    ffmpeg.onMessage(callback);
+    await this.exec(['-i', 'probe']);
+    ffmpeg.removeOnMessage(callback);
+    this.clearMemory();
+    return meta;
+  }
+
+  /**
+   * Generate a series of thumbnails 
+   * @param source Your input file
+   * @param count The number of thumbnails to generate
+   * @param start Lower time limit in seconds
+   * @param stop Upper time limit in seconds
+   * @example
+   * // type AsyncGenerator<Blob, void, void>
+   * const generator = ffmpeg.thumbnails('/samples/video.mp4');
+   * 
+   * for await (const image of generator) {
+   *    const img = document.createElement('img');
+   *    img.src = URL.createObjectURL(image);
+   *    document.body.appendChild(img);
+   * }
+   */
+  public async *thumbnails(
+    source: string | Blob,
+    count: number = 5,
+    start: number = 0,
+    stop?: number
+  ): AsyncGenerator<Blob, void, void> {
+    // make sure start and stop are defined
+    if (!stop) {
+      const { duration } = await this.meta(source);
+
+      // make sure the duration is defined
+      if (duration) stop = duration;
+      else {
+        console.warn(
+          'Could not extract duration from meta data please provide a stop argument. Falling back to 1sec otherwise.'
+        );
+        stop = 1;
+      }
+    }
+
+    // get the time increase for each iteration
+    const step = (stop - start) / count;
+
+    await this.writeFile('input', source);
+
+    for (let i = start; i < stop; i += step) {
+      await ffmpeg.exec([
+        '-ss',
+        i.toString(),
+        '-i',
+        'input',
+        '-frames:v',
+        '1',
+        'image.jpg',
+      ]);
+      try {
+        const res = await ffmpeg.readFile('image.jpg');
+        yield new Blob([res], { type: 'image/jpeg' });
+      } catch (e) {}
+    }
+    this.clearMemory();
   }
 
   private parseOutputOptions(): string[] {

@@ -222,7 +222,7 @@ export class FFmpegBase {
    * have been written to the memfs memory
    */
   public clearMemory(): void {
-    for (const path of this._memory) {
+    for (const path of [...new Set(this._memory)]) {
       this.deleteFile(path);
     }
     this._memory = [];

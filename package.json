@@ -1,7 +1,7 @@
 {
   "name": "@diffusion-studio/ffmpeg-js",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "FFmpeg.js - Use FFmpeg in the browser powered by WebAssembly",
   "type": "module",
   "files": [
@@ -28,6 +28,7 @@
   "keywords": [
     "ffmpeg",
     "webassembly",
+    "emscripten",
     "audio",
     "browser",
     "video",
@@ -42,9 +43,14 @@
     "mp3",
     "wav",
     "flac",
+    "mkv",
+    "mov",
     "ogg",
     "hevc",
     "h264",
+    "h265",
+    "quicktime",
+    "matroska",
     "editing",
     "cutting"
   ],

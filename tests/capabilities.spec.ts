@@ -140,4 +140,27 @@ test.describe('FFmpeg get capabilities', async () => {
     expect(Object.keys(formats.demuxers).includes('wav')).toBe(true);
     expect(Object.keys(formats.demuxers).includes('mpeg')).toBe(true);
   });
+
+  test('test that .meta returns a valid meta data dictionary', async () => {
+    const metadata = await page.evaluate(async () => {
+      return await ffmpeg.meta('/samples/video.mp4');
+    });
+
+    expect(Object.keys(metadata).length).toBeGreaterThan(0);
+    expect(metadata.bitrate?.length).toBeGreaterThan(0);
+    expect(metadata.duration).toBeGreaterThanOrEqual(30);
+    expect(metadata.formats?.includes('mp4')).toBe(true);
+    expect(metadata.streams.audio.length).toBe(1);
+    expect(metadata.streams.video.length).toBe(1);
+    // audio checks
+    expect(metadata.streams.audio.at(0)?.codec).toBe('aac');
+    expect(metadata.streams.audio.at(0)?.id).toBe('0:1');
+    expect(metadata.streams.audio.at(0)?.sampleRate).toBe(48000);
+    // video checks
+    expect(metadata.streams.video.at(0)?.codec).toBe('h264');
+    expect(metadata.streams.video.at(0)?.fps).toBe(30);
+    expect(metadata.streams.video.at(0)?.id).toBe('0:0');
+    expect(metadata.streams.video.at(0)?.height).toBe(270);
+    expect(metadata.streams.video.at(0)?.width).toBe(480);
+  });
 });

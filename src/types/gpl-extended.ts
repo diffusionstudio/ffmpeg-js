@@ -71,6 +71,7 @@ export type ExtensionGPLExtended =
   | 'mp4'
   | 'mpg'
   | 'mpeg'
+  | 'mkv'
   | 'mov'
   | 'ts'
   | 'm2t'

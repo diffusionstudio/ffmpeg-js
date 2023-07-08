@@ -108,3 +108,86 @@ export type WasmModuleURIs = {
    */
   worker: string;
 };
+
+/**
+ * Defines the metadata of an audio stream
+ */
+export type AudioStream = {
+  /**
+   * String containing the id given
+   * by ffmpeg, e.g. 0:1
+   */
+  id?: string;
+  /**
+   * String containing the audio codec
+   */
+  codec?: string;
+  /**
+   * Number containing the audio sample rate
+   */
+  sampleRate?: number;
+};
+
+/**
+ * Defines the metadata of a video stream
+ */
+export type VideoStream = {
+  /**
+   * String containing the id given
+   * by ffmpeg, e.g. 0:0
+   */
+  id?: string;
+  /**
+   * String containing the video codec
+   */
+  codec?: string;
+  /**
+   * Number containing the video width
+   */
+  width?: number;
+  /**
+   * Number containing the video height
+   */
+  height?: number;
+  /**
+   * Number containing the fps
+   */
+  fps?: number;
+};
+
+/**
+ * Defines the metadata of a ffmpeg input log.
+ * These information will be extracted from
+ * the -i command.
+ */
+export type Metadata = {
+  /**
+   * Number containing the duration of the
+   * input in seconds
+   */
+  duration?: number;
+  /**
+   * String containing the bitrate of the file.
+   * E.g 16 kb/s
+   */
+  bitrate?: string;
+  /**
+   * Array of strings containing the applicable
+   * container formats. E.g. mov, mp4, m4a,
+   * 3gp, 3g2, mj2
+   */
+  formats?: string[];
+  /**
+   * Separation in audio and video streams
+   */
+  streams: {
+    /**
+     * Array of audio streams
+     */
+    audio: AudioStream[];
+    /**
+     * Array of video streams
+     */
+    video: VideoStream[];
+  };
+};
