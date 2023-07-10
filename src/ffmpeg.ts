@@ -230,9 +230,9 @@ export class FFmpeg<
       streams: { audio: [], video: [] },
     };
     const callback = parseMetadata(meta);
-    ffmpeg.onMessage(callback);
+    this.onMessage(callback);
     await this.exec(['-i', 'probe']);
-    ffmpeg.removeOnMessage(callback);
+    this.removeOnMessage(callback);
     this.clearMemory();
     return meta;
   }
@@ -279,7 +279,7 @@ export class FFmpeg<
     await this.writeFile('input', source);
 
     for (let i = start; i < stop; i += step) {
-      await ffmpeg.exec([
+      await this.exec([
         '-ss',
         i.toString(),
         '-i',
@@ -289,9 +289,9 @@ export class FFmpeg<
         'image.jpg',
       ]);
       try {
-        const res = await ffmpeg.readFile('image.jpg');
+        const res = await this.readFile('image.jpg');
         yield new Blob([res], { type: 'image/jpeg' });
-      } catch (e) {}
+      } catch (e) { }
     }
     this.clearMemory();
   }
