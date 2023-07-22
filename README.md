@@ -135,7 +135,7 @@ Let's see how you would get the same result the **object oriented** way.
 ```typescript
 const source = 'https://<path to file>/<filename>.mp4';
 
-const result: Uint8Array = ffmpeg
+const result: Uint8Array | undefined = ffmpeg
   .input({ source })
   .ouput({ format: 'avi' })
   .export();
