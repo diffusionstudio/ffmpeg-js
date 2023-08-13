@@ -135,7 +135,7 @@ Let's see how you would get the same result the **object oriented** way.
 ```typescript
 const source = 'https://<path to file>/<filename>.mp4';
 
-const result: Uint8Array = ffmpeg
+const result: Uint8Array | undefined = ffmpeg
   .input({ source })
   .ouput({ format: 'avi' })
   .export();
@@ -155,7 +155,7 @@ Take a look at these tests for more examples:
 
 - Webassembly is limited to 2GB
 - Difficult to handle in unit tests, it's probably best if you mock the FFmpeg class and leave the testing to us (which is also good practice).
-- There is no hardware accileration available, making video encoding/decoding rather slow.
+- There is no hardware acceleration available, making video encoding/decoding rather slow.
 
 ## ⚙️ Configurations
 
