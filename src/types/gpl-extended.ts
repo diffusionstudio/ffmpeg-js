@@ -62,6 +62,7 @@ export type ExtensionGPLExtended =
   | 'ivf'
   | 'vag'
   | 'm4v'
+  | 'm4a'
   | 'sub'
   | 'mjpg'
   | 'mjpeg'

@@ -198,6 +198,15 @@ export class FFmpeg<
   }
 
   /**
+   * Choose which input should be inclueded in the output [see](https://trac.ffmpeg.org/wiki/Map)
+   * for more information
+   */
+  public map(input: string): this {
+    this._middleware.push('-map', input);
+    return this;
+  }
+
+  /**
    * Get the ffmpeg command from the specified
    * inputs and outputs.
    */
