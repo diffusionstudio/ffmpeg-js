@@ -2,7 +2,6 @@
   <img src="./public/icon.png" alt="Library Icon" width="164" height="164" />
 </p>
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/diffusion-studio/ffmpeg-js/graphs/commit-activity)
 [![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://ffmpeg-js-preview.vercel.app)
 [![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://discord.gg/n3mpzfejAb)
 [![GitHub license](https://badgen.net/github/license/Naereen/Strapdown.js)](https://github.com/diffusion-studio/ffmpeg-js/blob/main/LICENSE)
